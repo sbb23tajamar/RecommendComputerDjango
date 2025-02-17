@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload PDF</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #121212;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+        .container {
+            background: #1e1e1e;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 255, 255, 0.5);
+            text-align: center;
+            width: 400px;
+        }
+        .drop-zone {
+            border: 2px dashed cyan;
+            padding: 20px;
+            margin: 10px 0;
+            border-radius: 5px;
+            cursor: pointer;
+            background: #2a2a2a;
+            color: #bbb;
+        }
+        .drop-zone.dragover {
+            background: #00b3b3;
+            color: white;
+        }
+        .file-preview {
+            margin-top: 10px;
+            font-size: 14px;
+            color: cyan;
+        }
+        .remove-file {
+            color: red;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+        input[type="file"] {
+            display: none;
+        }
+        button {
+            padding: 10px 15px;
+            border: none;
+            background: cyan;
+            color: black;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        button:hover {
+            background: #00b3b3;
+        }
+        .message {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        .error {
+            color: red;
+        }
+        .success {
+            color: green;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Upload a PDF File</h1>
+        
+        {% if error %}
+            <p class="message error">{{ error }}</p>
+        {% endif %}
+        
+        {% if message %}
+            <p class="message success">{{ message }}</p>
+        {% endif %}
+        
+        <form action="" method="post" enctype="multipart/form-data" id="upload-form">
+            {% csrf_token %}
+            <div class="drop-zone" id="drop-zone">Drag & Drop PDF here or click to select</div>
+            <input type="file" name="pdf_file" id="file-input" accept="application/pdf" required>
+            <div class="file-preview" id="file-preview"></div>
+            <button type="submit">Upload</button>
+        </form>
+    </div>
+    
+    <script>
+        const dropZone = document.getElementById("drop-zone");
+        const fileInput = document.getElementById("file-input");
+        const filePreview = document.getElementById("file-preview");
+        
+        dropZone.addEventListener("click", () => fileInput.click());
+        
+        dropZone.addEventListener("dragover", (e) => {
+            e.preventDefault();
+            dropZone.classList.add("dragover");
+        });
+        
+        dropZone.addEventListener("dragleave", () => dropZone.classList.remove("dragover"));
+        
+        dropZone.addEventListener("drop", (e) => {
+            e.preventDefault();
+            dropZone.classList.remove("dragover");
+            
+            if (e.dataTransfer.files.length > 0) {
+                fileInput.files = e.dataTransfer.files;
+                updateFilePreview(e.dataTransfer.files[0]);
+            }
+        });
+        
+        fileInput.addEventListener("change", () => {
+            if (fileInput.files.length > 0) {
+                updateFilePreview(fileInput.files[0]);
+            }
+        });
+        
+        function updateFilePreview(file) {
+            filePreview.innerHTML = `${file.name} <span class='remove-file' onclick='removeFile()'>✖</span>`;
+        }
+        
+        function removeFile() {
+            fileInput.value = "";
+            filePreview.innerHTML = "";
+        }
+    </script>
+</body>
+</html>
