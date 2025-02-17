@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ChatBot | Inicio</title>
-    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: 'Rajdhani', sans-serif;
-            background-color: #121212;
+            font-family: 'Orbitron', sans-serif;
+            background: linear-gradient(135deg, #0f0f0f, #1a1a2e);
             color: #e0e0e0;
             display: flex;
             flex-direction: column;
@@ -27,13 +27,14 @@
             width: 80%;
             max-width: 900px;
         }
- 
+
         .action-div {
-            background: #1e1e1e;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
             border-radius: 15px;
             padding: 30px;
             text-align: center;
-            box-shadow: 0px 0px 10px rgba(0, 255, 255, 0.5);
+            box-shadow: 0px 0px 15px rgba(0, 255, 255, 0.6);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             flex: 1;
             display: flex;
@@ -45,28 +46,13 @@
             overflow: hidden;
         }
  
-        .action-div::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 255, 255, 0.2);
-            transition: left 0.3s ease;
-        }
-        
-        .action-div:hover::before {
-            left: 100%;
-        }
- 
         .action-div:hover {
-            transform: scale(1.05);
-            box-shadow: 0px 0px 20px rgba(0, 255, 255, 0.8);
+            transform: scale(1.08) rotate(2deg);
+            box-shadow: 0px 0px 25px rgba(0, 255, 255, 0.9);
         }
  
         .action-div a {
-            font-size: 2.5em;
+            font-size: 1.8em;
             color: cyan;
             text-decoration: none;
             transition: color 0.3s ease;
@@ -79,19 +65,10 @@
             color: #00b3b3;
         }
  
-        .action-div .emote {
-            font-size: 3.5em;
+        .action-div img {
+            width: 100px;
             margin-bottom: 15px;
-            user-select: none;
-            position: relative;
-            z-index: 1;
-        }
- 
-        .action-div p {
-            font-size: 1.2em;
-            color: cyan;
-            position: relative;
-            z-index: 1;
+            filter: drop-shadow(0px 0px 8px cyan);
         }
     </style>
 </head>
@@ -102,17 +79,18 @@
     <div class="container">
         <div class="action-div">
             <a href="{% url 'chatbot' %}">
-                <div class="emote">🤖</div>
+                <img src="https://cdn-icons-png.flaticon.com/512/4712/4712027.png" alt="Chatbot">
                 <p>Ir al Chatbot</p>
             </a>
         </div>
- 
+
         <div class="action-div">
             <a href="{% url 'upload_pdf' %}">
-                <div class="emote">📄</div>
+                <img src="https://cdn-icons-png.flaticon.com/512/2991/2991108.png" alt="Subir PDF">
                 <p>Subir PDF</p>
             </a>
         </div>
     </div>
 </body>
 </html>
+
