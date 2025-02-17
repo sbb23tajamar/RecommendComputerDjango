@@ -5,8 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI Chatbot</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron&display=swap');
+
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Orbitron', sans-serif;
             background-color: #121212;
             color: #fff;
             display: flex;
@@ -14,7 +16,6 @@
             align-items: center;
             justify-content: center;
             height: 100vh;
-            margin: 0;
         }
         .chat-container {
             width: 400px;
@@ -22,37 +23,29 @@
             background: #1e1e1e;
             border-radius: 10px;
             padding: 20px;
-            box-shadow: 0px 0px 15px rgba(0, 255, 255, 0.5);
-            display: flex;
-            flex-direction: column;
+            box-shadow: 0px 0px 15px rgba(0, 255, 255, 0.8);
+            position: relative;
         }
-        h2 {
-            text-align: center;
-            margin-bottom: 10px;
+        .back-button {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: cyan;
+            color: black;
+            padding: 8px 12px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .back-button:hover {
+            background: #00ffff;
+            transform: scale(1.1);
         }
         .messages {
             height: 300px;
             overflow-y: auto;
             border-bottom: 1px solid #333;
             padding-bottom: 10px;
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-        .message {
-            padding: 8px 12px;
-            border-radius: 8px;
-            max-width: 80%;
-            word-wrap: break-word;
-        }
-        .user-message {
-            background-color: cyan;
-            color: black;
-            align-self: flex-end;
-        }
-        .bot-message {
-            background-color: #333;
-            align-self: flex-start;
         }
         .input-container {
             display: flex;
@@ -63,8 +56,7 @@
             padding: 10px;
             border: none;
             border-radius: 5px;
-            outline: none;
-            font-size: 16px;
+            font-family: 'Orbitron', sans-serif;
         }
         button {
             padding: 10px;
@@ -74,41 +66,44 @@
             border-radius: 5px;
             margin-left: 5px;
             cursor: pointer;
-            font-size: 16px;
-            transition: background 0.3s;
+            display: flex;
+            align-items: center;
+            transition: 0.3s;
         }
         button:hover {
-            background: #00cccc;
+            background: #00ffff;
+            transform: scale(1.1);
+        }
+        .send-icon {
+            margin-left: 5px;
         }
     </style>
 </head>
 <body>
     <div class="chat-container">
+        <div class="back-button" onclick="goHome()">&#8592;</div>
         <h2>AI Chatbot</h2>
         <div class="messages" id="messages">
-            <div class="bot-message message">👋 ¡Hola! Soy tu asistente virtual. ¿En qué puedo ayudarte con la compra de un ordenador? 💻</div>
+            <div>👋 ¡Hola! Soy tu asistente virtual. ¿En qué puedo ayudarte con la compra de un ordenador? 💻</div>
         </div>
         <div class="input-container">
             <input type="text" id="user_input" placeholder="Escribe un mensaje...">
-            <button onclick="sendMessage()">Enviar</button>
+            <button onclick="sendMessage()">Enviar <span class="send-icon">✈️</span></button>
         </div>
     </div>
 
     <script>
+        function goHome() {
+            window.location.href = 'home.html';
+        }
         function sendMessage() {
             let input = document.getElementById("user_input");
             let message = input.value.trim();
             if (!message) return;
 
             let messagesDiv = document.getElementById("messages");
-
-            let userMessageDiv = document.createElement("div");
-            userMessageDiv.className = "user-message message";
-            userMessageDiv.textContent = message;
-            messagesDiv.appendChild(userMessageDiv);
-
+            messagesDiv.innerHTML += `<div><strong>You:</strong> ${message}</div>`;
             input.value = "";
-            messagesDiv.scrollTop = messagesDiv.scrollHeight;
             
             fetch("", {
                 method: "POST",
@@ -120,10 +115,7 @@
             })
             .then(response => response.json())
             .then(data => {
-                let botMessageDiv = document.createElement("div");
-                botMessageDiv.className = "bot-message message";
-                botMessageDiv.textContent = data.response;
-                messagesDiv.appendChild(botMessageDiv);
+                messagesDiv.innerHTML += `<div><strong>Bot:</strong> ${data.response}</div>`;
                 messagesDiv.scrollTop = messagesDiv.scrollHeight;
             })
             .catch(error => console.error("Error:", error));
