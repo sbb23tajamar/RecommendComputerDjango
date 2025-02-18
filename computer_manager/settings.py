@@ -83,9 +83,9 @@ DATABASES = {
         'PASSWORD': 'G7$kz!4m',  # Tu contraseña
         'HOST': 'computerserver.database.windows.net',  # Dirección de tu servidor en Azure
         'PORT': '',  # Deja vacío, ya que generalmente el puerto es el predeterminado (1433)
-        'OPTIONS': {
-            'driver': 'ODBC Driver 18 for SQL Server',  # Usa el driver más reciente
-            'extra_params': 'TrustServerCertificate=yes;',  # Para evitar errores con certificados
+        ##'OPTIONS': {
+            ##'driver': 'ODBC Driver 18 for SQL Server',  # Usa el driver más reciente
+            ##'extra_params': 'TrustServerCertificate=yes;',  # Para evitar errores con certificados
         },
     }
 }
