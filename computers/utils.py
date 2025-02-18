@@ -19,7 +19,7 @@ server = DATABASES['default']['HOST']
 database = DATABASES['default']['NAME']
 username = DATABASES['default']['USER']
 password = DATABASES['default']['PASSWORD']
-driver = DATABASES['default']['OPTIONS']['driver']
+##driver = DATABASES['default']['OPTIONS']['driver']
 
 # Configuración de Azure OpenAI
 client = AzureOpenAI(  
