@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <title>Upload PDF</title>
     <style>
         body {
@@ -14,6 +15,26 @@
             align-items: center;
             justify-content: center;
             height: 100vh;
+        }
+        .back-button {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: cyan;
+            color: rgb(255, 255, 255);
+            height: 50px;
+            width: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: 0.3s;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .back-button:hover {
+            background: #00ffff;
+            transform: scale(1.1);
         }
         .container {
             background: #1e1e1e;
@@ -74,6 +95,7 @@
     </style>
 </head>
 <body>
+    <div class="back-button" onclick="goHome()"><i class="fa-regular fa-circle-left"></i></div>
     <div class="container">
         <h1>Upload a PDF File</h1>
         
@@ -95,6 +117,9 @@
     </div>
     
     <script>
+        function goHome() {
+            window.location.href = "{% url 'inicio' %}";
+        }
         const dropZone = document.getElementById("drop-zone");
         const fileInput = document.getElementById("file-input");
         const filePreview = document.getElementById("file-preview");

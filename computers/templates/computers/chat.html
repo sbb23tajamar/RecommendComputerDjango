@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <title>AI Chatbot</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Orbitron&display=swap');
@@ -31,11 +32,16 @@
             top: 10px;
             left: 10px;
             background: cyan;
-            color: black;
-            padding: 8px 12px;
+            color: rgb(255, 255, 255);
+            height: 50px;
+            width: 50px;
             border-radius: 50%;
             cursor: pointer;
             transition: 0.3s;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
         .back-button:hover {
             background: #00ffff;
@@ -68,19 +74,18 @@
             cursor: pointer;
             display: flex;
             align-items: center;
+            justify-content: center;
             transition: 0.3s;
         }
         button:hover {
             background: #00ffff;
             transform: scale(1.1);
         }
-        .send-icon {
-            margin-left: 5px;
-        }
+
     </style>
 </head>
 <body>
-    <div class="back-button" onclick="goHome()">&#8592;</div>
+    <div class="back-button" onclick="goHome()"><i class="fa-regular fa-circle-left"></i></div>
     <div class="chat-container">
         <h2>AI Chatbot</h2>
         <div class="messages" id="messages">
@@ -94,7 +99,7 @@
 
     <script>
         function goHome() {
-            window.location.href = 'computers/home.html';
+            window.location.href = "{% url 'inicio' %}";
         }
         function sendMessage() {
             let input = document.getElementById("user_input");
