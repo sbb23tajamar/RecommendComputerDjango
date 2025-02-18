@@ -86,7 +86,7 @@ DATABASES = {
         ##'OPTIONS': {
             ##'driver': 'ODBC Driver 18 for SQL Server',  # Usa el driver más reciente
             ##'extra_params': 'TrustServerCertificate=yes;',  # Para evitar errores con certificados
-        },
+        ##},
     }
 }
 
