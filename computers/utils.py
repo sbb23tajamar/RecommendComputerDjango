@@ -262,7 +262,7 @@ def convert_storage_to_float(storage):
 #database method
 def get_db_connection():
     """Establishes a connection to the Azure SQL Database."""
-    ##DRIVER={driver} Necesario solo enm local no para subirlo en Render
+    ##conn = pyodbc.connect(f'DRIVER={driver};SERVER={server};DATABASE={database};UID={username};PWD={password}') Necesario solo en local no para subirlo en Render
     try:
         conn = mysql.connector.connect(
              host=server,
