@@ -4,6 +4,7 @@ from dotenv import load_dotenv
 import pyodbc
 import os
 import re
+import mysql.connector
 from azure.ai.formrecognizer import DocumentAnalysisClient
 from azure.core.credentials import AzureKeyCredential
 from computer_manager.settings import DOC_INT_ENDPOINT, DOC_INT_KEY, DOC_INT_MODEL, AI_ENDPOINT, AI_KEY, AI_MODEL, DATABASES
